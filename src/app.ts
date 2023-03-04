@@ -4,6 +4,8 @@ import notesRoutes from './routes/notes';
 
 const app = express();
 
+app.use(express.json());
+
 app.use('/api/notes', notesRoutes);
 
 app.use((req, res, next) => {
@@ -12,7 +14,7 @@ app.use((req, res, next) => {
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 app.use((error: unknown, req: Request, res: Response, next: NextFunction) => {
-  console.error(error);
+  // console.error(error);
   let errorMessage = 'An unknown error occured';
   if (error instanceof Error) errorMessage = error.message;
   res.status(500).json({ error: errorMessage });
